@@ -4,7 +4,7 @@ module "k3s_master" {
   vm_id        = 900
   role         = "master"
   ssh_username = "master"
-  disk_size    = 50
+  disk_size    = 40
 }
 
 # module "k3s_worker" {
