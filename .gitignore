@@ -1,3 +1,5 @@
 .DS_Store
 prometheus_default_values.yaml
-
+*.tfvars
+.terraform/
+terraform.tfstate*
