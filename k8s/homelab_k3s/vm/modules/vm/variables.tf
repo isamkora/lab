@@ -28,23 +28,38 @@ variable "ssh_username" {
   type    = string
   default = "kora"
 }
-variable "ssh_public_key_path" {
-  type    = string
-  default = "~/.ssh/id_ed25519.pub"
-}
-variable "datastore_id" {
-  type    = string
-  default = "local-lvm"
-}
-variable "bridge" {
-  type    = string
-  default = "vmbr0"
-}
+
 variable "pool_id" {
   type    = string
   default = "terraform-pool"
 }
-variable "disk_file_id" {
-  type    = string
-  default = "local:iso/ubuntu-server-26.04.img"
+
+variable "template_vm_id" {
+  description = "The template VM resource or ID to clone from"
+  type        = any
+}
+
+variable "network_bridge" {
+  type = string
+  default = "vmbr0"
+}
+
+variable "datastore_vm_disks" {
+  type = string
+  default = "local-lvm"
+}
+
+variable "ssh_public_key_path" {
+  type = string
+  default = "~/.ssh/id_ed25519.pub"
+}
+
+variable "disk_interface" {
+  type = string
+  default = "scsi0"
+}
+
+variable "datastore_files" {
+  type = string
+  default = "local"
 }

@@ -7,4 +7,5 @@ locals {
   effective_cores     = var.cores != null ? var.cores : local.role_defaults[var.role].cores
   effective_memory    = var.memory != null ? var.memory : local.role_defaults[var.role].memory
   effective_disk_size = var.disk_size != null ? var.disk_size : local.role_defaults[var.role].disk_size
+
 }

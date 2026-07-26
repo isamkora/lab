@@ -8,17 +8,17 @@ terraform {
 }
 
 provider "proxmox" {
-  endpoint  = "https://prox.corvus-alnitak.ts.net:8006/"
+  endpoint  = local.proxmox_endpoint
   api_token = var.proxmox_api_token
   insecure  = true # only if using self-signed certs
 
   ssh {
     agent    = true
-    username = "root"
+    username = local.ssh_admin_username
 
     node {
-      name    = "prox"
-      address = "prox.corvus-alnitak.ts.net"
+      name    = local.proxmox_node
+      address = local.proxmox_host
     }
   }
 }
