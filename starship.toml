@@ -1,0 +1,168 @@
+# https://github.com/Sin-cy/dotfiles/blob/main/starship/.config/starship/starship.toml
+scan_timeout = 100
+command_timeout = 500
+
+add_newline = true # Disable the blank line at the start of the prompt
+palette = "catppuccin_mocha"
+
+# A minimal left prompt
+format = """
+$os$directory$fill$all\
+$character"""
+
+
+[fill]
+symbol = " "
+
+[directory]
+format = "[ $path ]($style)"
+truncation_length = 4
+
+[directory.substitutions]
+"Downloads" = " "
+"wallpapers" = " "
+"dev" = "󰵮 "
+
+
+[character]
+disabled = false
+success_symbol = "[ ](bold fg:green)"
+error_symbol = "[✘ ](bold fg:red)"
+vimcmd_symbol = "[ ](bold fg:sapphire)"
+
+[sudo]
+disabled = false
+symbol = "🧙"
+format = "[$symbol]($style)"
+
+[git_branch]
+symbol = "[](base) "
+style = "fg:lavender bg:base"
+format =  "  [$symbol$branch]($style)[](base)"
+
+[custom.giturl]
+description = "Display symbol for remote Git server"
+command = """
+GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$GIT_REMOTE" =~ "github" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "git" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+else
+    GIT_REMOTE_SYMBOL=" "
+fi
+echo "$GIT_REMOTE_SYMBOL "
+"""
+when = "git rev-parse --is-inside-work-tree 2> /dev/null"
+format = "$output"
+require_repo = true
+ignore_timeout = true
+
+# [git_status]
+# format = "[$untracked$staged$modified$renamed$conflicted$ahead_behind ]($style)"
+# options available for format
+# staged     = "[+${count}](green)"
+# modified   = "[!${count}](yellow)"
+# renamed    = "[»${count}](blue)"
+# deleted    = "[-${count}](red)"
+# untracked  = "[?${count}](red)"
+# stashed    = "[≡${count}](lavender)"
+#conflicted = "[✖${count}](red bold)"
+# ahead      = "[⇡${count}](teal)"
+# behind     = "[⇣${count}](peach)"
+# diverged   = "[⇕⇡${ahead_count}⇣${behind_count}](mauve)"
+
+[git_status]
+#format = "[[ ($all_status$ahead_behind)]($style) ]"
+style = 'bold green'
+conflicted = '[ confliced=${count}](red) '
+up_to_date = '[󰘽 up-to-date](green) '
+untracked = '[󰋗 untracked=${count}](red) '
+ahead = ' ahead=${count}'
+diverged = ' ahead=${ahead_count}  behind=${behind_count}'
+behind = ' behind=${count}'
+stashed = '[ stashed=${count}](green) '
+modified = '[󰛿 modified=${count}](yellow) '
+staged = '[󰐗 staged=${count}](green) '
+renamed = '[󱍸 renamed=${count}](yellow) '
+deleted = '[󰍶 deleted=${count}](red) '
+disabled = false
+
+[terraform]
+format = 'via [$symbol$version $workspace]($style) '
+symbol = "󱁢 "
+
+[aws]
+format = '[$symbol(profile: "$profile" )(\(region: $region\) )]($style)'
+disabled = false
+style = 'bold blue'
+symbol = " "
+
+[kubernetes]
+symbol = "󱃾"
+disabled = false
+detect_files = ['k8s', 'Dockerfile']
+detect_extensions = ['yaml']
+format = '[$symbol ns:$namespace]($style)'
+
+[os]
+disabled = false
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = " "
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+
+[palettes.catppuccin_mocha]
+# --- background ---
+crust = "#11111b"
+mantle = "#181825"
+base = "#1e1e2e" # git branch bg
+
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+
+# --- text ---
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+
+# --- accents (catppuccin_mocha) ---
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe" # git branch fg
